@@ -1,6 +1,6 @@
 <?php
 
-namespace duckzland\LaravelTinymceImage\Http\Recaiver;
+namespace duckzland\LaravelTinymceImage\Http\Receiver;
 
 use Closure;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

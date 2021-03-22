@@ -29,7 +29,7 @@ class MediaUploadRequest extends HttpRequest {
     }
 
 
-    protected function validationData()
+    public function validationData()
     {
         return $this->headers;
     }

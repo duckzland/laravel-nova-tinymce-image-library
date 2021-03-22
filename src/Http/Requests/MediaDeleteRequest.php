@@ -9,7 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class MediaDeleteRequest extends FormRequest
 {
 
-    protected function validationData()
+    public function validationData()
     {
         return $this->json()->all();
     }

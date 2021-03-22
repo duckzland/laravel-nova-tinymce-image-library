@@ -12,6 +12,7 @@ use duckzland\LaravelTinymceImage\Http\Resources\MediaResource;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Arr;
 
 use Exception;
 
@@ -48,29 +49,37 @@ class MediaController extends Controller
                 throw new Exception('Failed to retrieve valid media');
             }
 
+            $page = $request->json()->get('page', 0);
             $searchText = $request->json()->get('search_text') ?: null;
             $perPage = $request->json()->get('per_page') ?: 18;
-
-            $query = $mediaClass::query();
             $className = get_class($model);
 
+            $query = $mediaClass::query()
+                ->where('model_id', '=', $model->getKey())
+                ->where('model_type', '=', $className);
+
+            $mime = explode(',', config('tinymce-imagelibrary.upload_allowed'));
+
+            if (!empty($mime)) {
+                $query->whereIn('mime_type', $mime);
+            }
+    
             if ($searchText) {
                 $query
-                ->where('model_type', '=', $className)
-                ->where(function ($query) use ($searchText) {
-                    $query->where('name', 'LIKE', '%' . $searchText . '%');
-                    $query->orWhere('file_name', 'LIKE', '%' . $searchText . '%');
-                });
+                    ->where(function ($query) use ($searchText) {
+                        $query->where('name', 'LIKE', '%' . $searchText . '%');
+                        $query->orWhere('file_name', 'LIKE', '%' . $searchText . '%');
+                    });
             }
 
-            $query->latest();
+            $query->orderBy('id');
             
-            $results = $query->paginate($perPage);
+            $results = $query->paginate($perPage, ['name', 'file_name', 'id', 'mime_type', 'model_type'], false, $page);
 
-            return response()->json([
+            return response()->json(array_merge([
                 'status' => 'OK',
                 'data' => MediaResource::collection($results)
-            ]);
+            ], Arr::except($results->toArray(), [ 'first_page_url', 'last_page_url', 'prev_page_url', 'next_page_url', 'path', 'from', 'to'])));
 
         }
 
@@ -163,7 +172,7 @@ class MediaController extends Controller
                 throw new Exception('Failed to retrieve valid media');
             }
 
-            $model->delete($request->json()->get('media_id'));
+            $model->deleteMedia($request->json()->get('media_id'));
 
             return response()->json([ 
                 'status' => 'OK', 
