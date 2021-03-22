@@ -1,0 +1,31 @@
+{
+    "name": "duckzland/laravel-tinymce-image",
+    "description": "Laravel TinyMCE integration to Spatie media library.",
+    "keywords": [
+        "laravel",
+        "tinymce"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0",
+        "laravel/framework": "^7.0",
+        "spatie/laravel-medialibrary": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "duckzland\\LaravelTinymceImage\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "duckzland\\LaravelTinymceImage\\LaravelTinymceImageServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
