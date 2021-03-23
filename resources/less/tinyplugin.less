@@ -1,3 +1,4 @@
+@import './_base_basic_antd.less';
 
 .tinymce-imagelibrary-dialog {
 
@@ -114,7 +115,7 @@
                             opacity: 1;
                         }
                     }
-            
+        
                     .remove {
                         position: absolute;
                         width: 40px;
@@ -134,22 +135,6 @@
                     }
                 }
 
-                .ant-input-group {
-                    width: 100%;
-                }
-
-                .ant-input-group-wrapper {
-                    width: 100%;
-                }
-
-                .ant-input {
-                    border: 1px solid #d9d9d9;
-                }
-
-                .ant-input-lg {
-                    padding: 6.5px 11px;
-                    font-size: 16px;
-                }
 
                 .ant-input-group-addon {
                     padding: 0 11px;
@@ -162,37 +147,16 @@
                     }
                 }
 
-                .ant-input-group-addon, .ant-input-group-wrap {
-                    width: 1px;
-                    white-space: nowrap;
-                    vertical-align: middle;
-                }
-
-                .ant-input-group-addon:last-child, 
-                .ant-input-group-addon:last-child 
-                .ant-input-group > .ant-input:last-child {
-                    border-top-left-radius: 0;
-                    border-bottom-left-radius: 0;
-                    border-left: 0;
-                }
-
-
-                .ant-btn:not(.ant-input-search-button) {
-                    text-align: center;
-                    cursor: pointer;
-                    height: 40px;
-                    padding: 4px 15px;
-                    border-radius: 2px;
-                    background: #fff;
-                    border: 1px solid #d9d9d9;
-                }
-
                 .ant-input-search-button {
                     height: 32px;
                     background: none;
                     position: relative;
                     top: -2px;
                     cursor: pointer;
+                    border: none;
+                    outline: 0;
+                    box-shadow: none;
+                    color: inherit;
 
                     &:hover {
                         color: inherit;
