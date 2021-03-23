@@ -60,7 +60,6 @@
                                 }
                             ],
                             onSubmit: function (api) {
-                                var data = api.getData();
                                 let source = e.value;
     
                                 if (source && source !== '') {
