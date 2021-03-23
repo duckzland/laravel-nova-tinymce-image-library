@@ -34,6 +34,8 @@ export default class Manager extends React.PureComponent {
 
     searchTimer = -1;
 
+    
+
     constructor(props) {
         super(props);
 
@@ -324,7 +326,6 @@ export default class Manager extends React.PureComponent {
 
             // Validation
             (e) => {
-                console.log(e);
                 if (e.status) {
                     switch (e.status) {
                         case '011_FILE_TYPE_NOT_ALLOWED':

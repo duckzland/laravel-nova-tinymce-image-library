@@ -63,7 +63,7 @@
                             var data = api.getData();
                             let source = e.value;
         
-                            if (source != ''){
+                            if (source && source !== '') {
                                 e.editor.focus();
                                 e.editor.selection.setContent('<img src="'+ source +'" />');
                                 api.close();
