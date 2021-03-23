@@ -6,12 +6,20 @@
 
         let token = "{{ csrf_token() }}";
         let urls = {
-                load: "{{ url(config('tinymce-imagelibrary.load_url')) }}",
-                upload: "{{ url(config('tinymce-imagelibrary.upload_url')) }}",
-                delete: "{{ url(config('tinymce-imagelibrary.delete_url')) }}"
-            };
+            load: "{{ url(config('tinymce-imagelibrary.load_url')) }}",
+            upload: "{{ url(config('tinymce-imagelibrary.upload_url')) }}",
+            delete: "{{ url(config('tinymce-imagelibrary.delete_url')) }}"
+        };
 
-        let labels = {};
+        let labels = {
+            searchPlaceholder: "{{ __('Search Image...') }}",
+            searchText: "{{ __('Search') }}",
+            uploadingText: "{{ __('Uploading...') }}",
+            uploadText: "{{ __('Upload') }}",
+            uploadError: "{{ __('Failed to upload file') }}",
+            uploadNotAllowed: "{{ __('File type not allowed') }}",
+            uploadTooLarge: "{{ __('File size too large') }}"
+        };
         let uploads = {
             allowed: "{{ config('tinymce-imagelibrary.upload_allowed') }}",
             max_size: "{{ config('tinymce-imagelibrary.upload_max_size') }}",
@@ -34,7 +42,7 @@
                             items: [
                                 {
                                     type: 'htmlpanel', // A HTML panel component
-                                    html: '<div class="gallery-div"><div class="tinymce-imagelibrary-root"></div></div>'
+                                    html: '<div class="tinymce-imagelibrary-root"></div>'
                                 }
                             ]
                         },
@@ -67,6 +75,8 @@
                         }
 
                     });
+
+                    tinymce.dom.DomQuery(".tox-dialog").addClass("tinymce-imagelibrary-dialog");
 
                     // Boot the react part
                     setTimeout(() => {

@@ -3,9 +3,15 @@
 
 export default class FileUploader {
 
-    constructor(file, options) {
+    constructor(file, options, complete = false, error = false, validation = false, chunk = false) {
+
         this.options = options;
         this.file = file;
+
+        this.onValidationError = validation;
+        this.onError = error;
+        this.onChunkComplete = chunk;
+        this.onComplete = complete;
     }
 
 
@@ -14,15 +20,15 @@ export default class FileUploader {
 
         const { file, options } = this;
 
-        if (options.allowed && !options.allowed.indexOf(file.type) === -1) {
-            options.onValidationError && options.onValidationError({ 
+        if (options.allowed && options.allowed.indexOf(file.type) === -1) {
+            this.onValidationError && this.onValidationError({ 
                 status: '011_FILE_TYPE_NOT_ALLOWED' 
             });
             return;
         }
 
         if (options.filesize && file.size > options.filesize) {
-            options.onValidationError && options.onValidationError({ 
+            this.onValidationError && this.onValidationError({ 
                 status: '012_FILE_SIZE_EXCEEDED_MAXIMUM' 
             });
             return;
@@ -36,11 +42,12 @@ export default class FileUploader {
                 const start = i * options.chunksize;
                 const end = start + options.chunksize;
 
-            
                 fetch(options.url, {
                     method: 'POST',
+                    mode: 'same-origin',
+                    credentials: 'same-origin',
                     headers: {
-                        'X-CSRF-TOKEN': Api.token,
+                        'X-CSRF-TOKEN': options.token,
                         'X-File-Name': file.name,
                         'X-File-Type': file.type,
                         'X-File-Size': file.size,
@@ -54,21 +61,20 @@ export default class FileUploader {
                     const nextQueue = this.queues.shift();
 
                     if (nextQueue) {
-                        options.onChunkComplete(this.totalchunks, i, json);
+                        this.onChunckComplete && this.onChunkComplete(this.totalchunks, i, json);
                         nextQueue();
                     }
                     else {
-                        options.onComplete(json);
+                        this.onComplete && this.onComplete(json);
                     }
                 })
                 .catch((e) => {
-                    options.onError && options.onError(e)
+                    this.onError && this.onError(e)
                 });
             });
         }
 
         const nextQueue = this.queues.shift();
         nextQueue && nextQueue();
-
     }
 }

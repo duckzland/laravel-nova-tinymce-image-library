@@ -3,7 +3,7 @@
 namespace duckzland\LaravelTinymceImage\Http\Controllers;
 
 use duckzland\LaravelTinymceImage\Http\Requests\MediaRequest;
-use duckzland\LaravelTinymceImage\Http\Requests\MediaUploaderRequest;
+use duckzland\LaravelTinymceImage\Http\Requests\MediaUploadRequest;
 use duckzland\LaravelTinymceImage\Http\Requests\MediaDeleteRequest;
 
 use duckzland\LaravelTinymceImage\Http\Receiver\MediaReceiver;
@@ -34,24 +34,24 @@ class MediaController extends Controller
             $mediaClass = config('medialibrary.media_model');
 
             if (empty($mediaClass)) {
-                throw new Exception('Failed to retrieve valid media');
+                throw new Exception(__('Failed to retrieve valid media'));
             }
 
             $getMedia = config('tinymce-imagelibrary.retrieving_model_function', false);
 
             if (empty($getMedia) || !function_exists($getMedia)) {
-                throw new Exception('Failed to retrieve valid media');
+                throw new Exception(__('Failed to retrieve valid media'));
             }
 
             $model = $getMedia();
 
             if (empty($model)) {
-                throw new Exception('Failed to retrieve valid media');
+                throw new Exception(__('Failed to retrieve valid media'));
             }
 
             $page = $request->json()->get('page', 0);
             $searchText = $request->json()->get('search_text') ?: null;
-            $perPage = $request->json()->get('per_page') ?: 18;
+            $perPage = $request->json()->get('per_page') ?: 10;
             $className = get_class($model);
 
             $query = $mediaClass::query()
@@ -100,42 +100,46 @@ class MediaController extends Controller
      * @param MediaUploaderRequest $request
      * @return JsonResponse
      */
-    public function upload(MediaUploaderRequest $request): JsonResponse 
+    public function upload(MediaUploadRequest $request): JsonResponse 
     {
         try {
             $file  = false;
-            $receiver = new MediaUploaderReceiver($request);
+            $receiver = new MediaReceiver($request);
             $filename = false;
             $fileurl = '';
+            $media_id = null;
 
             $getMedia = config('tinymce-imagelibrary.retrieving_model_function', false);
 
             if (empty($getMedia) || !function_exists($getMedia)) {
-                throw new Exception('Failed to retrieve valid media');
+                throw new Exception(__('Failed to retrieve valid media'));
             }
 
             $model = $getMedia();
 
             if (empty($model)) {
-                throw new Exception('Failed to retrieve valid media');
+                throw new Exception(__('Failed to retrieve valid media'));
             }
 
-            $receiver->receive(function ($f) use (&$filename, &$fileurl, $model) {
+            $receiver->receive(function ($f) use (&$filename, &$fileurl, &$media_id, $model) {
                 if (is_a($f, UploadedFile::class)) {
+                    $m =  $model->addMedia($f)->toMediaCollection(config('tinymce-imagelibrary.media_collection', 'uploaded_media'));
                     $filename = $f->getFileName();
-                    $fileurl = $model->addMedia($f)->toMediaCollection('customizer')->getFullUrl();
+                    $fileurl = $m->getFullUrl();
+                    $media_id = $m->getKey();
                 }
             });
 
             if (empty($filename) || empty($fileurl)) {
-                throw new Exception('Failed to upload file');
+                throw new Exception(__('Failed to upload file'));
             }
 
             return response()->json([ 
                 'status' => 'OK', 
-                'message' => 'Upload complete', 
+                'message' => __('Upload complete'), 
                 'filename' => $filename, 
-                'url' => $fileurl 
+                'url' => $fileurl,
+                'media_id' => $media_id
             ]);
         }
 
@@ -163,20 +167,20 @@ class MediaController extends Controller
             $getMedia = config('tinymce-imagelibrary.retrieving_model_function', false);
 
             if (empty($getMedia) || !function_exists($getMedia)) {
-                throw new Exception('Failed to retrieve valid media');
+                throw new Exception(__('Failed to retrieve valid media'));
             }
 
             $model = $getMedia();
 
             if (empty($model)) {
-                throw new Exception('Failed to retrieve valid media');
+                throw new Exception(__('Failed to retrieve valid media'));
             }
 
             $model->deleteMedia($request->json()->get('media_id'));
 
             return response()->json([ 
                 'status' => 'OK', 
-                'message' => 'Delete complete', 
+                'message' => __('Delete complete'), 
             ]);
         }
 

@@ -26,6 +26,8 @@ return [
     */
     'retrieving_model_function' => 'tinymce_imagelibrary_get_model',
 
+    'media_collection' => 'uploaded_media',
+
     'upload_url' => '/tinymce-image/upload',
     
     'load_url' => '/tinymce-image/load',
