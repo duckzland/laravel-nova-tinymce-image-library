@@ -39,7 +39,13 @@
         .tinymce-imagelibrary-root {
             .tiny-imagelibs {
                 width: 100%;
-                height: 100%;
+                height: calc(100% - 60px);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                overflow: hidden;
 
                 .ant-message {
                     -webkit-box-sizing: border-box;
@@ -133,8 +139,35 @@
                         cursor: pointer;
                         z-index: 10;
                     }
-                }
 
+                    .attribution {
+                        position: absolute;
+                        z-index: 3;
+                        bottom: 0;
+                        font-size: 12px;
+                        width: 100%;
+                        padding: 5px;
+                        background: rgba(0,0,0,0.6);
+                        color: #fff;
+                        display: inline-flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 2px;
+                
+                        a {
+                            color: #ccc;
+                        }
+                
+                        .author {
+                            max-width: 100px;
+                            white-space: pre;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+                    }
+                }
 
                 .ant-input-group-addon {
                     padding: 0 11px;
@@ -237,6 +270,8 @@
                             align-items: center;
                             position: relative;
                             z-index: 2;
+                            width: 100%;
+                            height: 100%;
                         }
     
                         .image-placeholder {
@@ -274,7 +309,9 @@
                         }
     
                         img {
-                            max-width: 100%;
+                            min-width: 100%;
+                            max-height: 100%;
+                            object-fit: cover;
                         }
                     }
                 }

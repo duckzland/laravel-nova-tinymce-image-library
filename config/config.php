@@ -24,7 +24,7 @@ return [
     | Create a function that return a single laravel model instance
     |
     */
-    'retrieving_model_function' => 'tinymce_imagelibrary_get_model',
+    'retrieving_model_function' => env('TINYMCE_IMAGELIBRARY_RETRIEVING_MODEL_FUNCTION_NAME', 'tinymce_imagelibrary_get_model'),
 
 
     /*
@@ -35,7 +35,7 @@ return [
     | The model media collection to assign the newly uploaded file to
     |
     */
-    'media_collection' => 'uploaded_media',
+    'media_collection' => env('TINYMCE_IMAGELIBRARY_MEDIA_COLLECTION', 'uploaded_media'),
 
 
     /*
@@ -46,7 +46,7 @@ return [
     | The upload url callback
     |
     */
-    'upload_url' => '/tinymce-image/upload',
+    'upload_url' => env('TINYMCE_IMAGELIBRARY_UPLOAD_URL', '/tinymce-image/upload'),
     
 
     /*
@@ -57,7 +57,7 @@ return [
     | The load url callback
     |
     */
-    'load_url' => '/tinymce-image/load',
+    'load_url' => env('TINYMCE_IMAGELIBRARY_LOAD_URL', '/tinymce-image/load'),
 
 
     /*
@@ -68,7 +68,7 @@ return [
     | The delete url callback
     |
     */
-    'delete_url' => '/tinymce-image/delete',
+    'delete_url' => env('TINYMCE_IMAGELIBRARY_DELETE_URL', '/tinymce-image/delete'),
 
 
     /*
@@ -79,7 +79,7 @@ return [
     | The allowed mime type for uploading file
     |
     */
-    'upload_allowed' => 'image/jpeg,image/gif,image/png,image/jpg',
+    'upload_allowed' => env('TINYMCE_IMAGELIBRARY_UPLOAD_ALLOWED_MIME', 'image/jpeg,image/gif,image/png,image/jpg'),
 
 
     /*
@@ -90,7 +90,7 @@ return [
     | The maximum file size for upload
     |
     */
-    'upload_max_size' => 2 * 1024 * 1024,
+    'upload_max_size' => env('TINYMCE_IMAGELIBRARY_UPLOAD_MAX_SIZE', 2 * 1024 * 1024),
 
 
     /*
@@ -101,6 +101,29 @@ return [
     | The chunk size for each upload
     |
     */
-    'upload_chunk_size' => 1024 * 1024
+    'upload_chunk_size' => env('TINYMCE_IMAGELIBRARY_UPLOAD_CHUNK_SIZE', 1024 * 1024),
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pexels support
+    |--------------------------------------------------------------------------
+    | 
+    | Insert the pexels api keys to enable fetching image from pexels
+    |
+    */
+    'api_key_pexels' => env('TINYMCE_IMAGELIBRARY_PEXELS_API_KEY', false),
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Unsplash support
+    |--------------------------------------------------------------------------
+    | 
+    | Insert the unsplash api keys to enable the fetching image from unsplash
+    |
+    */
+    'api_key_unsplash' => env('TINYMCE_IMAGELIBRARY_UNSPLASH_API_KEY', false)
 
 ];

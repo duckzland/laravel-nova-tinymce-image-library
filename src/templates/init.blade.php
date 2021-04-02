@@ -13,6 +13,10 @@
             };
 
             let labels = {
+                tabLocalFile: "{{ __('Local File') }}",
+                tabPexelsFile: "{{ __('Pexels') }}",
+                tabUnsplashFile: "{{ __('Unsplash') }}",
+                attributionText: "{{ __('Photo by %{author} on %{source}') }}",
                 searchPlaceholder: "{{ __('Search Image...') }}",
                 searchText: "{{ __('Search') }}",
                 uploadingText: "{{ __('Uploading...') }}",
@@ -21,11 +25,15 @@
                 uploadNotAllowed: "{{ __('File type not allowed') }}",
                 uploadTooLarge: "{{ __('File size too large') }}"
             };
+
             let uploads = {
                 allowed: "{{ config('tinymce-imagelibrary.upload_allowed') }}",
                 max_size: "{{ config('tinymce-imagelibrary.upload_max_size') }}",
                 chunk_size: "{{ config('tinymce-imagelibrary.upload_chunk_size') }}"
             };
+
+            let pexels = "{{ config('tinymce-imagelibrary.api_key_pexels', false) }}";
+            let unsplash = "{{ config('tinymce-imagelibrary.api_key_unsplash', false) }}";
 
             tinymce && tinymce.on('AddEditor', function (e) {
 
@@ -79,7 +87,7 @@
 
                         // Boot the react part
                         setTimeout(() => {
-                            window.tinymceBoot && window.tinymceBoot(token, e, urls, labels, uploads);
+                            window.tinymceBoot && window.tinymceBoot(token, e, urls, labels, uploads, pexels, unsplash);
                         }, 100);
                     }
                 });
