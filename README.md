@@ -78,6 +78,24 @@ if (!function_exists('app_tinymce_imagelibrary_get_model')) {
 ```
 
 
+
+Pexels & Unsplash Integration
+=============================
+
+To enable the pexels and /or unsplash support, please add these to your .env file:
+
+
+```
+# Laravel tinymce integration 
+TINYMCE_IMAGELIBRARY_PEXELS_API_KEY="xxxxxxx"
+TINYMCE_IMAGELIBRARY_UNSPLASH_API_KEY="xxxxxxxx"
+
+```
+
+
+
+
+
 Initializing
 ============
 
