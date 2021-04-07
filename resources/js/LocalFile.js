@@ -48,6 +48,9 @@ export default class LocalFile extends React.PureComponent {
         this.handleLoad();
 
         message.config({
+            duration: 1,
+            maxCount: 1,
+            onClose: () => message.destroy(),
             getContainer: () => document.querySelector('.tinymce-imagelibrary-dialog .content-box')
         });
     }
@@ -170,7 +173,7 @@ export default class LocalFile extends React.PureComponent {
                 });
             },
             (res) => {
-                res.message && message.error(res.message);
+                res.message && message.error(res.message, 1, () => message.destroy());
 
                 this.setState({
                     loading: false,
@@ -217,15 +220,13 @@ export default class LocalFile extends React.PureComponent {
                     deleting: deleting.filter((x) => x !== mediaId)
                 })
 
-                res.message && message.error(res.message);
+                res.message && message.error(res.message, 1, () => message.destroy());
 
             },
             (res) => {
-                res.message && message.error(res.message);
+                res.message && message.error(res.message, 1, () => message.destroy());
             },
-            (res) => {
-                console.log(res);
-            }
+            () => { }
         )
     }
 
@@ -271,7 +272,7 @@ export default class LocalFile extends React.PureComponent {
             // Complete
             (res) => {
                 if (res.status === 'OK') {
-                    message.info(res.message);
+                    message.info(res.message, 1, () => message.destroy());
 
                     const { data = {} } = this.state;
                     const { media_id, url } = res;
@@ -299,7 +300,7 @@ export default class LocalFile extends React.PureComponent {
 
                 }
                 else {
-                    message.error(res.message);
+                    message.error(res.message, 1, () => message.destroy());
                         
                     this.setState({
                         uploading: false
@@ -309,7 +310,7 @@ export default class LocalFile extends React.PureComponent {
 
             // Error
             (e) => {
-                message.error(this.labels.uploadError || 'Failed to upload');
+                message.error(this.labels.uploadError || 'Failed to upload', 1, () => message.destroy());
                 this.setState({
                     uploading: false,
                 });
@@ -320,11 +321,11 @@ export default class LocalFile extends React.PureComponent {
                 if (e.status) {
                     switch (e.status) {
                         case '011_FILE_TYPE_NOT_ALLOWED':
-                            message.error(this.labels.uploadNotAllowed || 'File type not allowed');
+                            message.error(this.labels.uploadNotAllowed || 'File type not allowed', 1, () => message.destroy());
                             break;
 
                         case '012_FILE_SIZE_EXCEEDED_MAXIMUM':
-                            message.error(this.labels.uploadTooLarge || 'File size too large');
+                            message.error(this.labels.uploadTooLarge || 'File size too large', 1, () => message.destroy());
                             break;
                     }
                 }
