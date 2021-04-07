@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="{{ url('/vendor/tinymce-imagelibrary/css/tinyplugin.css') }}"></link>
 <script>
 
+
     document.addEventListener("DOMContentLoaded", function() {
 
         function bootTinyPlugin() {
@@ -13,6 +14,9 @@
             };
 
             let labels = {
+                dialogLocalFile: "{!! __('Choose From Library') !!}",
+                dialogPexelsFile: "{!! __('Photo provided by <a href=\"https://pexels.com\" target=\"_blank\">Pexels</a>') !!}",
+                dialogUnsplashFile: "{!! __('Photo provided by <a href=\"https://unsplash.com/?utm_source=vincere&utm_medium=referral\" target=\"_blank\">Unsplash</a>') !!}",
                 tabLocalFile: "{{ __('Local File') }}",
                 tabPexelsFile: "{{ __('Pexels') }}",
                 tabUnsplashFile: "{{ __('Unsplash') }}",
@@ -43,7 +47,7 @@
                     onAction: function (_) {
 
                         tinyMCE.activeEditor.windowManager.open({
-                            title: '{{ __("Image Library") }}',
+                            title: '{{ __("Choose From Library") }}',
                             size: 'large',
                             body: {
                                 type: 'panel', 

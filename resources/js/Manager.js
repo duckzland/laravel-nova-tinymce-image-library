@@ -32,11 +32,38 @@ export default class Manager extends React.PureComponent {
     }
 
 
+    handleTabChange = (key) => {
+        const target = document.querySelector('.tinymce-imagelibrary-dialog .tox-dialog__title');
+        const { labels } = this;
+        if (target) {
+            switch (key) {
+                case 'localFile':
+                    if (labels.dialogLocalFile) {
+                        target.innerHTML = labels.dialogLocalFile;
+                    }
+                    break;
+
+                case 'pexelsFile':
+                    if (labels.dialogPexelsFile) {
+                        target.innerHTML = labels.dialogPexelsFile;
+                    }
+                    break;
+
+                case 'unsplashFile':
+                    if (labels.dialogUnsplashFile) {
+                        target.innerHTML = labels.dialogUnsplashFile;
+                    }
+                    break;
+            }
+        }
+    }
+
+
     render() {
-        const { editor, token, urls, labels, uploads, pexels, unsplash } = this;
+        const { editor, token, urls, labels, uploads, pexels, unsplash, handleTabChange } = this;
 
         return (
-            <Tabs defaultActiveKey="localFile">
+            <Tabs defaultActiveKey="localFile" onChange={ handleTabChange }>
                 <TabPane tab={ labels.tabLocalFile } key="localFile">
                     <LocalFile editor={ editor } token={ token } urls={ urls } labels={ labels } uploads={ uploads } />
                 </TabPane>
