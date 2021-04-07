@@ -1,5 +1,125 @@
 .tinymce-imagelibrary-dialog {
 
+    @keyframes antMoveUpIn {
+        0% {
+          transform: translateY(-100%);
+          transform-origin: 0 0;
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0%);
+          transform-origin: 0 0;
+          opacity: 1;
+        }
+      }
+      
+      @keyframes antMoveUpOut {
+        0% {
+          transform: translateY(0%);
+          transform-origin: 0 0;
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100%);
+          transform-origin: 0 0;
+          opacity: 0;
+        }
+      }
+
+    .ant-move-up-enter,
+    .ant-move-up-appear {
+        -webkit-animation-duration: 0.2s;
+        animation-duration: 0.2s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-play-state: paused;
+        animation-play-state: paused;
+    }
+
+    .ant-move-up-leave {
+        -webkit-animation-duration: 0.2s;
+        animation-duration: 0.2s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-play-state: paused;
+        animation-play-state: paused;
+    }
+
+    .ant-move-up-enter.ant-move-up-enter-active,
+    .ant-move-up-appear.ant-move-up-appear-active {
+        -webkit-animation-name: antMoveUpIn;
+        animation-name: antMoveUpIn;
+        -webkit-animation-play-state: running;
+        animation-play-state: running;
+    }
+
+    .ant-move-up-leave.ant-move-up-leave-active {
+        -webkit-animation-name: antMoveUpOut;
+        animation-name: antMoveUpOut;
+        -webkit-animation-play-state: running;
+        animation-play-state: running;
+        pointer-events: none;
+    }
+
+    .ant-move-up-enter,
+    .ant-move-up-appear {
+        opacity: 0;
+        -webkit-animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+        animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+    }
+
+    .ant-move-up-leave {
+        -webkit-animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+        animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+    }
+
+    .ant-move-down-enter,
+    .ant-move-down-appear {
+        -webkit-animation-duration: 0.2s;
+        animation-duration: 0.2s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-play-state: paused;
+        animation-play-state: paused;
+    }
+
+    .ant-move-down-leave {
+        -webkit-animation-duration: 0.2s;
+        animation-duration: 0.2s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-play-state: paused;
+        animation-play-state: paused;
+    }
+
+    .ant-move-down-enter.ant-move-down-enter-active,
+    .ant-move-down-appear.ant-move-down-appear-active {
+        -webkit-animation-name: antMoveDownIn;
+        animation-name: antMoveDownIn;
+        -webkit-animation-play-state: running;
+        animation-play-state: running;
+    }
+
+    .ant-move-down-leave.ant-move-down-leave-active {
+        -webkit-animation-name: antMoveDownOut;
+        animation-name: antMoveDownOut;
+        -webkit-animation-play-state: running;
+        animation-play-state: running;
+        pointer-events: none;
+    }
+
+    .ant-move-down-enter,
+    .ant-move-down-appear {
+        opacity: 0;
+        -webkit-animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+        animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+    }
+
+    .ant-move-down-leave {
+        -webkit-animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+        animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+    }
+
     /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
     /* stylelint-disable no-duplicate-selectors */
     /* stylelint-disable */
