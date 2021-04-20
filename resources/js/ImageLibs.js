@@ -238,4 +238,17 @@ export default class ImageLibs {
             callback && callback(result);
         }
     }
+
+
+    callDownload(id) {
+        switch (this.active) {
+            case 'unsplash':
+                this.provider.photos.getPhoto(id)
+                    .then(toJson)
+                    .then(json => {
+                        this.provider.photos.downloadPhoto(json);
+                    });
+                break;
+        }
+    }
 }
