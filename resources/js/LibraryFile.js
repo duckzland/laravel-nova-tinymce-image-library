@@ -80,6 +80,8 @@ export default class LibraryFile extends React.PureComponent {
         this.setState({
             active: imgId
         });
+
+        this.library.callDownload(imgId);
     }
 
 
