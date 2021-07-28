@@ -282,7 +282,8 @@ export default class LocalFile extends React.PureComponent {
                         order: -1
                     }
     
-                    let i = Object.keys(data).length;
+                    //let i = Object.keys(data).length;
+                    let i = 0;
                     const d = Object.values(data);
     
                     d.sort((a, b) => a.order > b.order ? true : false)
@@ -359,8 +360,8 @@ export default class LocalFile extends React.PureComponent {
             <List.Item key={ key }>
                 <div className={ c.join(' ') } onClick={ () => handleChoose(item.id, item.url) }>
                     <LazyLoadImage 
-                        key={ item.url } 
-                        src={ item.url } 
+                        key={ item.thumbnail || item.url } 
+                        src={ item.thumbnail || item.url } 
                         effect="blur" />
                     <div className="image-placeholder">                  
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480">

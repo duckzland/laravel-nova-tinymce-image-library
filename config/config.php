@@ -38,6 +38,18 @@ return [
     'media_collection' => env('TINYMCE_IMAGELIBRARY_MEDIA_COLLECTION', 'uploaded_media'),
 
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Media Thumbnail
+    |--------------------------------------------------------------------------
+    |
+    | The media conversion name for thumbnail
+    |
+    */
+    'media_thumbnail' => env('TINYMCE_IMAGELIBRARY_MEDIA_THUMBNAIL', 'thumbnail'),
+
+
     /*
     |--------------------------------------------------------------------------
     | Upload URL

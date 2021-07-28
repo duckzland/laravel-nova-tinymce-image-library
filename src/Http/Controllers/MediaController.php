@@ -72,9 +72,9 @@ class MediaController extends Controller
                     });
             }
 
-            $query->orderBy('id');
+            $query->orderBy('id', 'DESC');
             
-            $results = $query->paginate($perPage, ['name', 'file_name', 'id', 'mime_type', 'model_type'], false, $page);
+            $results = $query->paginate($perPage, ['*'], false, $page);
 
             return response()->json(array_merge([
                 'status' => 'OK',
