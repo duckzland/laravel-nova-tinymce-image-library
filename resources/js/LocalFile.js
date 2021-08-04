@@ -286,7 +286,7 @@ export default class LocalFile extends React.PureComponent {
                     let i = 0;
                     const d = Object.values(data);
     
-                    d.sort((a, b) => a.order > b.order ? 0 : 1)
+                    d.sort((a, b) => a.order > b.order ? 1 : -1)
                         .map((d) => {
                             d.order = i;
                             data[d.id] = d;
@@ -393,7 +393,7 @@ export default class LocalFile extends React.PureComponent {
     render() {
         const { renderListItem, handleLoad, handleSearch, handleUpload } = this;
         const { data = {}, loading, searching, uploading, hasMore, searchText } = this.state;
-        const orderedData = Object.values(data).sort((a, b) => a.order > b.order ? 0 : 1);
+        const orderedData = Object.values(data).sort((a, b) => a.order > b.order ? 1 : -1);
 
         const cName = ['tiny-imagelibs'];
         if (loading) {
