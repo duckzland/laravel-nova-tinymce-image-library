@@ -31,7 +31,7 @@ class MediaController extends Controller
 
         try {
             // Use configuration from spatie media library config
-            $mediaClass = config('medialibrary.media_model');
+            $mediaClass = config('medialibrary.media_model', config('media-library.media_model'));
 
             if (empty($mediaClass)) {
                 throw new Exception(__('Failed to retrieve valid media'));
